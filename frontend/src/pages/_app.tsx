@@ -1,13 +1,12 @@
-import { Head } from "next/document";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/global.scss";
-import { Container } from "reactstrap";
+import styles from "../styles/app.module.scss";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Container>
+    <main className={styles.mainPage}>
       <Component {...pageProps} />
-    </Container>
+    </main>
   );
 }
 

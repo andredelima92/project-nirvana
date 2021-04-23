@@ -1,19 +1,20 @@
-import { Col, Row, Button, FormGroup } from "reactstrap";
+import { Button } from "reactstrap";
 import { t } from "../assets/utils";
 import Header from "../components/Header";
+import styles from "./home.module.scss";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Row className="d-flex justify-content-center align-items-center">
-        <Col sm="6">
-          <input type="text" className="form-control mt-2" />
-        </Col>
-        <Col sm="2">
-          <Button>{t("SEARCH")}</Button>
-        </Col>
-      </Row>
+      <section className={styles.filterContainer}>
+        <input
+          type="text"
+          placeholder="Digite para pesquisar"
+          className="form-control"
+        />
+        <Button color="primary">{t("SEARCH")}</Button>
+      </section>
     </>
   );
 }

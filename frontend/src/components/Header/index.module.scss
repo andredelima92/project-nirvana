@@ -1,10 +1,12 @@
 .headerContainer {
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
   img {
     width: 10rem;
     height: 10rem;
-  }
-
-  button {
-    transform: translate(0%, 100%);
   }
 }
