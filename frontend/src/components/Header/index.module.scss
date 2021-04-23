@@ -1,12 +1,29 @@
 .headerContainer {
-  display: flex;
-
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-
   img {
     width: 10rem;
     height: 10rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+    color: rgb(129, 129, 129);
+    white-space: nowrap;
+    border: none;
+    background: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 0.2s filter;
+
+    &:hover {
+      filter: brightness(0.5);
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 480px) {
+    button {
+      font-size: 1rem;
+      margin-right: 1rem;
+    }
   }
 }

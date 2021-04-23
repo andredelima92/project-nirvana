@@ -10,7 +10,7 @@ export default function Home() {
       <section className={styles.filterContainer}>
         <input
           type="text"
-          placeholder="Digite para pesquisar"
+          placeholder={t("INPUT_FOR_SEARCH")}
           className="form-control"
         />
         <Button color="primary">{t("SEARCH")}</Button>

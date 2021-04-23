@@ -1,4 +1,15 @@
 export default {
   SEARCH: "Pesquisar",
   REGISTER_TOURIST_SPOT: "Cadastrar um ponto turístico",
+  INPUT_FOR_SEARCH: "Digite para pesquisar",
+  NAME: "Nome",
+  LOCALIZATION: "Localização",
+  UF_CITY: "UF/Cidade",
+  CITY: "Cidade",
+  REFERENCE: "Referencia",
+  DESCRIPTION: "Descrição",
+  SAVED_SUCCESS: "Registro salvo com sucesso",
+  NAME_EMPTY: "Nome precisa ser preenchido",
+  UF_EMPTY: "Escolha um estado",
+  CITY_EMPTY: "Escolha uma cidade",
 };
