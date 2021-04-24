@@ -14,7 +14,15 @@ class TravelController extends Controller
      */
     public function index(Request $request)
     {
-        $travels = Travel::orderBy($request->_orderBy, 'desc')->offset($request->_offset)->limit($request->_limit)->get();
+        $travels = Travel::where('name', 'like', '%' . strtoupper($request->_search) . '%')
+            ->orWhere('description', 'like', '%' . strtoupper($request->_search) . '%')
+            ->orWhere('city', 'like', '%' . strtoupper($request->_search) . '%')
+            ->orWhere('reference', 'like', '%' . strtoupper($request->_search) . '%')
+            ->orderBy($request->_orderBy, 'desc')
+            ->offset($request->_offset)
+            ->limit($request->_limit)
+            ->get();
+
         return response()->json($travels);
     }
 
