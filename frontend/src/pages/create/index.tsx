@@ -68,16 +68,8 @@ const Create = ({ states }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!name) {
-      return notification.$e(t("NAME_EMPTY"));
-    }
-
-    if (!uf) {
-      return notification.$e(t("UF_EMPTY"));
-    }
-
-    if (!city) {
-      return notification.$e(t("CITY_EMPTY"));
+    if (!name || !uf || !city || !reference || !description) {
+      return notification.$e(t("FIELDS_EMPTY"));
     }
 
     const form = {
@@ -203,7 +195,7 @@ const Create = ({ states }) => {
               </Col>
             </Row>
           </FormGroup>
-          <FormGroup className="mt-5">
+          <FormGroup className="mt-5 mb-2">
             <Row>
               <Col sm="7" xs="9" className="offset-md-2">
                 <Link href="/">

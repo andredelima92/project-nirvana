@@ -5,7 +5,7 @@ import { Container } from "reactstrap";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Container className={styles.mainPage}>
+    <Container fluid className={styles.mainPage}>
       <Component {...pageProps} />
     </Container>
   );

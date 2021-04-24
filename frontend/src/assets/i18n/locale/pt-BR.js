@@ -10,7 +10,9 @@ export default {
   DESCRIPTION: "Descrição",
   SAVED_SUCCESS: "Registro salvo com sucesso",
   NAME_EMPTY: "Nome precisa ser preenchido",
+  FIELDS_EMPTY: "Todos os campos devem ser preenchidos",
   UF_EMPTY: "Escolha um estado",
   CITY_EMPTY: "Escolha uma cidade",
   ERROR_TO_SAVE: "Ocorreu um erro no servidor ao salvar o registo",
+  SEE_MORE: "Ver mais...",
 };

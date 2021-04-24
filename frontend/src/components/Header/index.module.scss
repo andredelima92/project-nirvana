@@ -4,15 +4,24 @@
     height: 10rem;
   }
 
+  border: 1px solid #fff;
+  border-radius: 1px;
+  height: 10rem;
+  background: rgb(114, 137, 168);
+  margin-bottom: 2rem;
+
   button {
     font-size: 1.1rem;
-    color: rgb(129, 129, 129);
+    color: rgb(71, 71, 71);
     white-space: nowrap;
     border: none;
     background: none;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: 0.2s filter;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       filter: brightness(0.5);

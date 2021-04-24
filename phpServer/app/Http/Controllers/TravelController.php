@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Travel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TravelController extends Controller
 {
@@ -12,9 +13,10 @@ class TravelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Travel::all());
+        $travels = Travel::orderBy($request->_orderBy, 'desc')->offset($request->_offset)->limit($request->_limit)->get();
+        return response()->json($travels);
     }
 
     /**
