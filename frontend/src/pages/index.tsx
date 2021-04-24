@@ -14,6 +14,7 @@ import Header from "../components/Header";
 import api from "../services/api";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import styles from "./home.module.scss";
+import Link from "next/link";
 
 interface Travel {
   id: number;
@@ -26,9 +27,13 @@ interface Travel {
 
 interface HomeProps {
   travels: Travel[];
+  paginate: number;
 }
 
-export default function Home({ travels }: HomeProps) {
+export default function Home({ travels, paginate }: HomeProps) {
+  const nextPage = Number(paginate) + 1;
+  const previousPage = Number(paginate) - 1;
+
   return (
     <>
       <Header />
@@ -48,7 +53,7 @@ export default function Home({ travels }: HomeProps) {
           </Col>
         </Row>
       </section>
-      <section className="mt-2 mb-5">
+      <section className="mt-2 mb-4">
         <Row>
           {travels.map((travel) => (
             <Col md="3 mb-2" key={travel.id}>
@@ -70,9 +75,25 @@ export default function Home({ travels }: HomeProps) {
         </Row>
       </section>
       <footer>
-        <Row className="d-flex ">
-          <AiOutlineArrowLeft size={35} className="mr-auto" />
-          <AiOutlineArrowRight size={35} className="ml-auto" />
+        <Row>
+          {paginate > 1 && (
+            <>
+              <Link href={`/?_paginate=${previousPage}`}>
+                <a className="mr-auto">
+                  <AiOutlineArrowLeft size={35} />
+                </a>
+              </Link>
+            </>
+          )}
+          {travels.length === 4 && (
+            <>
+              <Link href={`/?_paginate=${nextPage}`}>
+                <a className="ml-auto">
+                  <AiOutlineArrowRight size={35} />
+                </a>
+              </Link>
+            </>
+          )}
         </Row>
       </footer>
     </>
@@ -95,6 +116,7 @@ export const getServerSideProps = async ({ query }) => {
   return {
     props: {
       travels: data,
+      paginate: query._paginate ?? 1,
     },
   };
 };
