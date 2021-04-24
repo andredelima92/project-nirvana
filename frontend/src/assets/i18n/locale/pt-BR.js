@@ -14,5 +14,7 @@ export default {
   UF_EMPTY: "Escolha um estado",
   CITY_EMPTY: "Escolha uma cidade",
   ERROR_TO_SAVE: "Ocorreu um erro no servidor ao salvar o registo",
+  ERROR_TO_DELETE: "Ocorreu um erro no servidor ao deletar o registo",
+  DELETE_SUCCESS: "Registro apagado com sucesso",
   SEE_MORE: "Ver mais...",
 };

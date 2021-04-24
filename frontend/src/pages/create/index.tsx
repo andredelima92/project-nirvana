@@ -16,22 +16,36 @@ import Link from "next/link";
 import api from "../../services/api";
 import { useRouter } from "next/router";
 
-const Create = ({ states }) => {
+interface Travel {
+  id: number;
+  name: string;
+  uf: string;
+  city: string;
+  reference: string | null;
+  description: string | null;
+}
+interface CreateProps {
+  states: any;
+  travel: Travel;
+  travel_id: number | null;
+}
+
+const Create = ({ states, travel, travel_id }: CreateProps) => {
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [uf, setUf] = useState("");
-  const [city, setCity] = useState("");
+  const [id, setId] = useState(travel_id);
+  const [name, setName] = useState(travel.name);
+  const [uf, setUf] = useState(travel.uf);
+  const [city, setCity] = useState(travel.city);
   const [citys, setCitys] = useState([]);
-  const [reference, setReference] = useState("");
-  const [description, setDescription] = useState("");
+  const [reference, setReference] = useState(travel.reference);
+  const [description, setDescription] = useState(travel.description);
 
   async function getCitys(UF: string) {
     const citys = await ibgeService.getCitys(UF);
 
     if (citys) {
       setCitys(citys);
-      setCity(citys[0]);
     }
   }
 
@@ -134,11 +148,12 @@ const Create = ({ states }) => {
                   className="form-control sm-mb-2"
                   id="uf"
                   onChange={handleSetUF}
+                  defaultValue={travel.uf}
                 >
                   <option value=""></option>
-                  {states.map((state: string) => (
-                    <option key={state} value={state}>
-                      {state}
+                  {states.map((uf, i) => (
+                    <option key={uf} value={uf}>
+                      {uf}
                     </option>
                   ))}
                 </select>
@@ -150,8 +165,13 @@ const Create = ({ states }) => {
                   placeholder={t("CITY")}
                   onChange={handleSetCity}
                 >
+                  <option value=""></option>
                   {citys.map((city, i) => (
-                    <option key={i} value={city}>
+                    <option
+                      key={i}
+                      value={city}
+                      selected={city === travel.city}
+                    >
                       {city}
                     </option>
                   ))}
@@ -217,10 +237,18 @@ const Create = ({ states }) => {
 
 export default Create;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ query }) => {
+  const id = query.id ?? null;
+  let travel = {};
+
   const states = await ibgeService.getStates();
 
+  if (id) {
+    const { data } = await api.get(`travels/${id}`);
+    travel = data;
+  }
+
   return {
-    props: { states },
+    props: { states, travel, travel_id: id },
   };
 };

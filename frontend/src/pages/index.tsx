@@ -13,8 +13,11 @@ import { t } from "../assets/utils";
 import Header from "../components/Header";
 import api from "../services/api";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import styles from "./home.module.scss";
+import { BsTrash } from "react-icons/bs";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { useCallback } from "react";
+import notification from "../services/notification";
 
 interface Travel {
   id: number;
@@ -31,8 +34,20 @@ interface HomeProps {
 }
 
 export default function Home({ travels, paginate }: HomeProps) {
+  const router = useRouter();
   const nextPage = Number(paginate) + 1;
   const previousPage = Number(paginate) - 1;
+
+  const handleDelete = useCallback(async (travel: Travel) => {
+    try {
+      await api.delete(`travels/${travel.id}`);
+      notification.$s(t("DELETE_SUCCESS"));
+      router.push(`/?_paginate=${paginate}`);
+    } catch (err) {
+      notification.$e(t("ERROR_TO_DELETE"));
+      console.log(err);
+    }
+  }, []);
 
   return (
     <>
@@ -66,7 +81,21 @@ export default function Home({ travels, paginate }: HomeProps) {
                   <CardText className="text-truncate">
                     {travel.description}
                   </CardText>
-                  <Button>{t("SEE_MORE")}</Button>
+                  <Row>
+                    <Col>
+                      <Link href={`/create?id=${travel.id}`}>
+                        <Button>{t("SEE_MORE")}</Button>
+                      </Link>
+                    </Col>
+                    <Col>
+                      <Button
+                        onClick={() => handleDelete(travel)}
+                        color="danger"
+                      >
+                        <BsTrash />
+                      </Button>
+                    </Col>
+                  </Row>
                 </CardBody>
                 <CardFooter>{`${travel.city}, ${travel.uf}`}</CardFooter>
               </Card>
