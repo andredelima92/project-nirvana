@@ -79,6 +79,28 @@ const Create = ({ states, travel, travel_id }: CreateProps) => {
     []
   );
 
+  const create = useCallback(async (form) => {
+    try {
+      await api.post("/travels", form);
+      notification.$s(t("SAVED_SUCCESS"), false, true);
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+      notification.$e(t("ERROR_TO_SAVE"), false);
+    }
+  }, []);
+
+  const update = useCallback(async (form, id) => {
+    try {
+      await api.put(`/travels/${id}`, form);
+      notification.$s(t("SAVED_SUCCESS"), false, true);
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+      notification.$e(t("ERROR_TO_SAVE"), false);
+    }
+  }, []);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -94,14 +116,11 @@ const Create = ({ states, travel, travel_id }: CreateProps) => {
       description,
     };
 
-    try {
-      await api.post("/travels", form);
-      notification.$s(t("SAVED_SUCCESS"), false, true);
-      router.push("/");
-    } catch (err) {
-      console.log(err);
-      notification.$e(t("ERROR_TO_SAVE"), false);
+    if (id) {
+      return update(form, id);
     }
+
+    return create(form);
   };
 
   return (
