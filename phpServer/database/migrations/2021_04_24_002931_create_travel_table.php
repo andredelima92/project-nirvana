@@ -18,8 +18,8 @@ class CreateTravelTable extends Migration
             $table->string('name');
             $table->string('uf', 2);
             $table->string('city');
-            $table->string('reference');
-            $table->text('description', 100);
+            $table->string('reference')->nullable();
+            $table->text('description', 100)->nullable();
             $table->timestamps();
         });
     }

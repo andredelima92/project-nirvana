@@ -12,4 +12,5 @@ export default {
   NAME_EMPTY: "Nome precisa ser preenchido",
   UF_EMPTY: "Escolha um estado",
   CITY_EMPTY: "Escolha uma cidade",
+  ERROR_TO_SAVE: "Ocorreu um erro no servidor ao salvar o registo",
 };

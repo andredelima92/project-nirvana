@@ -13,8 +13,12 @@ import notification from "../../services/notification.js";
 
 import styles from "./index.module.scss";
 import Link from "next/link";
+import api from "../../services/api";
+import { useRouter } from "next/router";
 
 const Create = ({ states }) => {
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [uf, setUf] = useState("");
   const [city, setCity] = useState("");
@@ -61,7 +65,7 @@ const Create = ({ states }) => {
     []
   );
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!name) {
@@ -84,9 +88,14 @@ const Create = ({ states }) => {
       description,
     };
 
-    console.log(form);
-
-    notification.$s(t("SAVED_SUCCESS"), false, true);
+    try {
+      await api.post("/travels", form);
+      notification.$s(t("SAVED_SUCCESS"), false, true);
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+      notification.$e(t("ERROR_TO_SAVE"), false);
+    }
   };
 
   return (

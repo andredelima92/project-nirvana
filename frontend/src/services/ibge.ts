@@ -18,7 +18,7 @@ const service = {
   async getCitys(UF: string) {
     try {
       const { data } = await axios.get(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${UF}/distritos`
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${UF}/distritos?orderBy=nome`
       );
 
       const citys = data.map((city: any) => city.nome);
