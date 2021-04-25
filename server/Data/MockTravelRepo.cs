@@ -5,7 +5,7 @@ namespace server.Data
 {
     public class MockTravelRepo : ITravelRepo
     {
-        public IEnumerable<Travel> GetAppTravels()
+        public IEnumerable<Travel> get()
         {
             var travels = new List<Travel>
             {
@@ -17,7 +17,7 @@ namespace server.Data
             return travels;
         }
 
-        public Travel GetTravelById(int id)
+        public Travel show(int id)
         {
             return new Travel{Id=0, Name="teste", City="cidade", Uf="SP", Description="descriçaõ", Reference="referencia"};
         }

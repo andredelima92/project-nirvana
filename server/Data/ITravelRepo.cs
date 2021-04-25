@@ -5,7 +5,7 @@ namespace server.Data
 {
     public interface ITravelRepo
     {
-        IEnumerable<Travel> GetAppTravels();
-        Travel GetTravelById(int id);
+        IEnumerable<Travel> get();
+        Travel show(int id);
     }
 }

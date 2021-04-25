@@ -3,6 +3,7 @@ namespace server.Models
 {
     public class Travel
     {
+        [Key]
         public int Id {get; set;}
 
         [Required(ErrorMessage = "Campo nome é obrigatorio")]

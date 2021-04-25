@@ -10,12 +10,17 @@ namespace server.Controllers
     [ApiController]
     public class TravelsController: ControllerBase
     {
-        private readonly MockTravelRepo _repository = new MockTravelRepo();
+        private readonly ITravelRepo _repository;
+
+        public TravelsController(ITravelRepo repository)
+        {
+            _repository = repository;    
+        }
 
         [HttpGet]
         public ActionResult <IEnumerable<Travel>> GetAllTravels()
         {
-            var travels = _repository.GetAppTravels();
+            var travels = _repository.get();
 
             return Ok(travels);
         }
@@ -23,7 +28,7 @@ namespace server.Controllers
         [HttpGet("{id}")]
         public ActionResult <Travel> GetTravelById(int id)
         {
-            var travels = _repository.GetTravelById(id);
+            var travels = _repository.show(id);
 
             return Ok(travels);
         }
