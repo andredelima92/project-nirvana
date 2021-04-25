@@ -5,7 +5,7 @@ namespace server.Data
 {
     public class MockTravelRepo : ITravelRepo
     {
-        public IEnumerable<Travel> get()
+        public IEnumerable<Travel> get(int _limit,int _offset, string _orderBy, string _search)
         {
             var travels = new List<Travel>
             {
@@ -31,5 +31,16 @@ namespace server.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void update(Travel travel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void destroy(Travel travel)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

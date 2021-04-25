@@ -22,11 +22,13 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<TravelReadDto>> GetAllTravels()
+        public ActionResult <IEnumerable<TravelReadDto>> GetAllTravels(int _limit,int _offset, string _orderBy, string _search)
         {
-            var travels = _repository.get();
+            
+            var travels = _repository.get(_limit,_offset, _orderBy, _search);
 
             return Ok(_mapper.Map<IEnumerable<TravelReadDto>>(travels));
+            // return Ok(travels);
         }
 
         [HttpGet("{id}", Name="GetTravelById")]
@@ -53,7 +55,41 @@ namespace server.Controllers
             var travelReadDto = _mapper.Map<TravelReadDto>(travelModel);
 
             return CreatedAtRoute(nameof(GetTravelById), new {Id = travelReadDto.Id}, travelReadDto);
+        }
 
+        [HttpPut("{id}")]
+        public ActionResult<TravelReadDto> UpdateTravel(int id, TravelUpdateDto travelUpdateDto)
+        {
+            var travel = _repository.show(id);
+            
+            if (travel == null) 
+            {
+                return NotFound();
+            }
+            
+            _mapper.Map(travelUpdateDto, travel);
+            _repository.update(travel);
+            _repository.SaveChanges();
+
+            var travelReadDto = _mapper.Map<TravelReadDto>(travel);
+
+            return Ok(travelReadDto);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteTravel(int id)
+        {
+            var travel = _repository.show(id);
+            
+            if (travel == null) 
+            {
+                return NotFound();
+            }
+
+            _repository.destroy(travel);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }
