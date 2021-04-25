@@ -150,8 +150,6 @@ export const getServerSideProps = async ({ query }) => {
     },
   });
 
-  console.log(data);
-
   return {
     props: {
       travels: data,
