@@ -29,7 +29,7 @@ namespace server.Controllers
             return Ok(_mapper.Map<IEnumerable<TravelReadDto>>(travels));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetTravelById")]
         public ActionResult <TravelReadDto> GetTravelById(int id)
         {
             var travels = _repository.show(id);
@@ -50,7 +50,10 @@ namespace server.Controllers
             _repository.store(travelModel);
             _repository.SaveChanges();
 
-            return Ok(travelModel);
+            var travelReadDto = _mapper.Map<TravelReadDto>(travelModel);
+
+            return CreatedAtRoute(nameof(GetTravelById), new {Id = travelReadDto.Id}, travelReadDto);
+
         }
     }
 }

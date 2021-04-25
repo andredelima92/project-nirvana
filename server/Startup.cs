@@ -35,6 +35,17 @@ namespace server
             
             services.AddScoped<ITravelRepo, SqlTravelRepo>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddCors(options =>
+    {
+            options.AddPolicy("AllOrigins",
+                builder =>
+                {
+                    builder.AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,9 +56,10 @@ namespace server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("AllOrigins");
 
             app.UseAuthorization();
 
