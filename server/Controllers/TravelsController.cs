@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Services;
 using server.Models;
+using System.Collections.Generic;
+using server.Data;
 
 namespace server.Controllers
 {
@@ -8,23 +10,22 @@ namespace server.Controllers
     [ApiController]
     public class TravelsController: ControllerBase
     {
-        TravelService _travelService;
-        public TravelsController(TravelService travel)
-        {
-            this._travelService = travel;
-        }
+        private readonly MockTravelRepo _repository = new MockTravelRepo();
 
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult <IEnumerable<Travel>> GetAllTravels()
         {
-            return Ok(this._travelService.GetTravels());
+            var travels = _repository.GetAppTravels();
+
+            return Ok(travels);
         }
 
-        [HttpPost]
-        public ActionResult Post(Travel travel)
+        [HttpGet("{id}")]
+        public ActionResult <Travel> GetTravelById(int id)
         {
-            this._travelService.AddTravel(travel);
-            return Ok();
+            var travels = _repository.GetTravelById(id);
+
+            return Ok(travels);
         }
     }
 }
