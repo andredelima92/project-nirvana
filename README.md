@@ -22,7 +22,7 @@
 
 ## *Backend - Dotnet*
 <p>Acessar a pasta server</p>
-<p>Configura o arquivo <b>appsettings.json</b> com o acesso ao banco de dados na linha na propriedade <b>TravelConnection</b></p>
+<p>Configura o arquivo <b>appsettings.json</b> com o acesso ao banco de dados propriedade <b>TravelConnection</b></p>
 <p>Rode o seguinte comando para rodar as migration e criar o banco de dados com as tabelas</p>
 
 `dotnet ef database update`
@@ -34,7 +34,7 @@
 <i>Obs: Utilizar somente a rota <b>http</b></i>
 
 ## *Frontend*
-<p>Acessar a pasta frontend e instalar as dependencias:</p>
+<p>Acessar a pasta frontend e instalar as dependências:</p>
 
 `yarn` ou `npm install`
 
