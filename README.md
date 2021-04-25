@@ -3,6 +3,7 @@
 ## Frontend
  - ReactJs
  - NextJs
+ - Typescript
  - Yarn ou NPM
 
 ## Backend (PHP) (opcional)
