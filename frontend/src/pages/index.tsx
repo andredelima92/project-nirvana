@@ -19,6 +19,8 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 import notification from "../services/notification";
 
+import styles from "./index.module.scss";
+
 interface Travel {
   id: number;
   name: string;
@@ -78,7 +80,7 @@ export default function Home({ travels, paginate, _search }: HomeProps) {
         <Row>
           {travels.map((travel) => (
             <Col md="3 mb-2" key={travel.id}>
-              <Card>
+              <Card className={styles.cardContainer}>
                 <CardHeader>{travel.name}</CardHeader>
                 <CardBody>
                   <CardTitle tag="h5" className="text-truncate">
@@ -140,19 +142,25 @@ export const getServerSideProps = async ({ query }) => {
   const paginate = query._paginate ? query._paginate * _limit : _limit;
   const _offset = paginate - 4;
   const _search = query._search ?? "";
+  let travels = [];
 
-  const { data } = await api.get("travels", {
-    params: {
-      _offset,
-      _limit,
-      _orderBy: "id",
-      _search,
-    },
-  });
+  try {
+    const { data } = await api.get("travels", {
+      params: {
+        _offset,
+        _limit,
+        _orderBy: "id",
+        _search,
+      },
+    });
+    travels = data;
+  } catch (err) {
+    console.log(err);
+  }
 
   return {
     props: {
-      travels: data,
+      travels,
       paginate: query._paginate ?? 1,
       _search,
     },

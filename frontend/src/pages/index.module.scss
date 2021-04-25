@@ -1,0 +1,6 @@
+.cardContainer {
+  transition: 0.2s transform;
+  &:hover {
+    transform: translateY(-5%);
+  }
+}
