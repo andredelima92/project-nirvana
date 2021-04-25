@@ -3,6 +3,8 @@ using server.Services;
 using server.Models;
 using System.Collections.Generic;
 using server.Data;
+using AutoMapper;
+using server.Dtos;
 
 namespace server.Controllers
 {
@@ -11,26 +13,44 @@ namespace server.Controllers
     public class TravelsController: ControllerBase
     {
         private readonly ITravelRepo _repository;
+        private readonly IMapper _mapper;
 
-        public TravelsController(ITravelRepo repository)
+        public TravelsController(ITravelRepo repository, IMapper mapper)
         {
             _repository = repository;    
+            _mapper = mapper;    
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<Travel>> GetAllTravels()
+        public ActionResult <IEnumerable<TravelReadDto>> GetAllTravels()
         {
             var travels = _repository.get();
 
-            return Ok(travels);
+            return Ok(_mapper.Map<IEnumerable<TravelReadDto>>(travels));
         }
 
         [HttpGet("{id}")]
-        public ActionResult <Travel> GetTravelById(int id)
+        public ActionResult <TravelReadDto> GetTravelById(int id)
         {
             var travels = _repository.show(id);
 
-            return Ok(travels);
+            if (travels != null)
+            {
+                return Ok(_mapper.Map<TravelReadDto>(travels));
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult <TravelReadDto> CreateTravel(TravelCreateDto travelCreateDto)
+        {
+            var travelModel = _mapper.Map<Travel>(travelCreateDto);
+
+            _repository.store(travelModel);
+            _repository.SaveChanges();
+
+            return Ok(travelModel);
         }
     }
 }

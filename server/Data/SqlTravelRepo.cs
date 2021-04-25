@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using server.Models;
@@ -20,6 +21,21 @@ namespace server.Data
         public Travel show(int id)
         {
             return _context.Travels.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void store(Travel travel)
+        {
+            if(travel == null)
+            {
+                throw new ArgumentNullException(nameof(travel));
+            }
+
+            _context.Travels.Add(travel);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

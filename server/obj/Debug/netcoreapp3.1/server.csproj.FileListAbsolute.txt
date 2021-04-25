@@ -71,3 +71,5 @@
 /var/www/html/project-nirvana/server/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll
 /var/www/html/project-nirvana/server/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll
 /var/www/html/project-nirvana/server/obj/Debug/netcoreapp3.1/server.csproj.CopyComplete
+/var/www/html/project-nirvana/server/bin/Debug/netcoreapp3.1/AutoMapper.dll
+/var/www/html/project-nirvana/server/bin/Debug/netcoreapp3.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

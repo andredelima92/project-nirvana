@@ -21,5 +21,15 @@ namespace server.Data
         {
             return new Travel{Id=0, Name="teste", City="cidade", Uf="SP", Description="descriçaõ", Reference="referencia"};
         }
+
+        public void store(Travel travel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
