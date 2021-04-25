@@ -6,10 +6,10 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TravelController: ControllerBase
+    public class TravelsController: ControllerBase
     {
         TravelService _travelService;
-        public TravelController(TravelService travel)
+        public TravelsController(TravelService travel)
         {
             this._travelService = travel;
         }
